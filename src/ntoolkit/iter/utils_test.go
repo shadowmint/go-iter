@@ -3,7 +3,6 @@ package iter_test
 import (
 	"container/list"
 	"ntoolkit/assert"
-	"ntoolkit/errors"
 	"ntoolkit/iter"
 	"testing"
 )
@@ -20,8 +19,9 @@ func TestCount(T *testing.T) {
 		T.Assert(err == nil)
 		T.Assert(count == 3)
 
-		_, err = iter.Count(i)
-		T.Assert(errors.Is(err, iter.ErrEndIteration{}))
+		count, err = iter.Count(i)
+		T.Assert(err == nil)
+		T.Assert(count == 0)
 	})
 }
 
@@ -38,7 +38,8 @@ func TestCollect(T *testing.T) {
 		T.Assert(all != nil)
 		T.Assert(len(all) == 3)
 
-		_, err = iter.Count(i)
-		T.Assert(errors.Is(err, iter.ErrEndIteration{}))
+		all, err = iter.Collect(i)
+		T.Assert(err == nil)
+		T.Assert(len(all) == 0)
 	})
 }
